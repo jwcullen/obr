@@ -28,11 +28,11 @@ class SphericalAngle {
 
   SphericalAngle& operator=(const SphericalAngle other);
 
-  /*!\brief Returns a spherical angle representation of given |world_position|
+  /*!\brief Returns a spherical angle representation of given `world_position`
    * (World Space).
    *
    * \param world_position 3D position in world space.
-   * \return Spherical angle that represents the |world_position|.
+   * \return Spherical angle that represents the `world_position`.
    */
   static SphericalAngle FromWorldPosition(const WorldPosition& world_position);
 
@@ -47,7 +47,7 @@ class SphericalAngle {
    */
   SphericalAngle FlipAzimuth() const;
 
-  /*!\brief Returns the |WorldPosition| coordinates (World Space) on the unit
+  /*!\brief Returns the `WorldPosition` coordinates (World Space) on the unit
    * sphere corresponding to this spherical angle. The transformation is defined
    * as such: x = -cos(elevation) * sin(azimuth) y = sin(elevation) z =
    * -cos(elevation) * cos(azimuth)
@@ -57,7 +57,7 @@ class SphericalAngle {
   WorldPosition GetWorldPositionOnUnitSphere() const;
 
   /*!\brief Returns the rotated version of the spherical angle using given
-   * |WorldRotation|.
+   * `WorldRotation`.
    *
    *  \param rotation Rotation to be applied to the spherical angle.
    *  \return Rotated version of the spherical angle.

@@ -49,16 +49,16 @@ const SphericalAngle kZrotatedSourceAngle =
 // Rotation interpolation interval in terms of frames (used by the HoaRotator).
 const size_t kSlerpFrameInterval = 32;
 
-class HoaRotatorTest : public ::testing::Test {
+class AmbisonicRotatorTest : public ::testing::Test {
  protected:
-  HoaRotatorTest() {}
+  AmbisonicRotatorTest() {}
 
-  ~HoaRotatorTest() override {}
+  ~AmbisonicRotatorTest() override {}
 
   // Test method which creates a HOA soundfield buffer, rotates it by
-  // |rotation_angle| against |rotation_axis|, and compares the output to the
+  // `rotation_angle` against `rotation_axis`, and compares the output to the
   // reference soundfield buffer (where the source is already spatialized at the
-  // |expected_source_angle|).
+  // `expected_source_angle`).
   void CompareRotatedAndReferenceSoundfields(
       const std::vector<float>& input_data, float rotation_angle,
       const WorldPosition& rotation_axis,
@@ -90,8 +90,8 @@ class HoaRotatorTest : public ::testing::Test {
                                                      &encoded_rotated_buffer);
     reference_source_mono_codec.ProcessPlanarAudioData(
         input_buffer, &encoded_reference_buffer);
-    // Rotate the test soundfield by |rotation_angle| degrees wrt the given
-    // |rotation_axis|.
+    // Rotate the test soundfield by `rotation_angle` degrees wrt the given
+    // `rotation_axis`.
     const WorldRotation rotation = WorldRotation(
         AngleAxisf(rotation_angle * kRadiansFromDegrees, rotation_axis));
 
@@ -102,10 +102,10 @@ class HoaRotatorTest : public ::testing::Test {
     EXPECT_TRUE(result);
     // Check if the sound source in the reference and rotated buffers are in the
     // same direction.
-    // If the buffer size is more than |kSlerpFrameInterval|, due to
-    // interpolation, we expect that the last |kSlerpFrameInterval| frames have
+    // If the buffer size is more than `kSlerpFrameInterval`, due to
+    // interpolation, we expect that the last `kSlerpFrameInterval` frames have
     // undergone the full rotation.
-    // If the buffer size is less than |kSlerpFrameInterval|, because no
+    // If the buffer size is less than `kSlerpFrameInterval`, because no
     // interpolation is applied, the rotated soundfield should result from
     // frame 0.
     for (size_t channel = 0; channel < encoded_rotated_buffer.num_channels();
@@ -127,9 +127,9 @@ class HoaRotatorTest : public ::testing::Test {
   std::unique_ptr<AmbisonicRotator> hoa_rotator_;
 };
 
-// Tests that no rotation is aplied if |kRotationQuantizationRad| is not
+// Tests that no rotation is aplied if `kRotationQuantizationRad` is not
 // exceeded.
-TEST_F(HoaRotatorTest, RotationThresholdTest) {
+TEST_F(AmbisonicRotatorTest, RotationThresholdTest) {
   const size_t kNumThirdOrderAmbisonicChannels = 16;
   const size_t kFramesPerBuffer = 16;
   const std::vector<float> kInputVector(
@@ -150,12 +150,13 @@ TEST_F(HoaRotatorTest, RotationThresholdTest) {
 }
 
 typedef tuple<WorldPosition, SphericalAngle> TestParams;
-class HoaAxesRotationTest : public HoaRotatorTest,
+class AmbisonicAxesRotationTest
+    : public AmbisonicRotatorTest,
                             public ::testing::WithParamInterface<TestParams> {};
 
 // Tests third order soundfield rotation against the x, y and z axis using long
 // input buffers (>> slerp interval).
-TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleLongBuffer) {
+TEST_P(AmbisonicAxesRotationTest, CompareWithExpectedAngleLongBuffer) {
   const WorldPosition& rotation_axis = ::testing::get<0>(GetParam());
   const SphericalAngle& expected_angle = ::testing::get<1>(GetParam());
   const size_t kLongFramesPerBuffer = 512;
@@ -166,7 +167,7 @@ TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleLongBuffer) {
 
 // Tests third order soundfield rotation against the x, y and z axes using short
 // input buffers (< slerp interval).
-TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleShortBuffer) {
+TEST_P(AmbisonicAxesRotationTest, CompareWithExpectedAngleShortBuffer) {
   const WorldPosition& rotation_axis = ::testing::get<0>(GetParam());
   const SphericalAngle& expected_angle = ::testing::get<1>(GetParam());
   const size_t kShortFramesPerBuffer = kSlerpFrameInterval / 2;
@@ -178,7 +179,7 @@ TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleShortBuffer) {
 // Tests third order soundfield rotation against the x, y and z axes using
 // buffer sizes that are (> slerp interval) and not integer multiples of
 // the slerp interval.
-TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleOddBufferSizes) {
+TEST_P(AmbisonicAxesRotationTest, CompareWithExpectedAngleOddBufferSizes) {
   const WorldPosition& rotation_axis = ::testing::get<0>(GetParam());
   const SphericalAngle& expected_angle = ::testing::get<1>(GetParam());
   const size_t frames_per_buffer = kSlerpFrameInterval + 3U;
@@ -188,7 +189,7 @@ TEST_P(HoaAxesRotationTest, CompareWithExpectedAngleOddBufferSizes) {
 }
 
 INSTANTIATE_TEST_CASE_P(
-    TestParameters, HoaAxesRotationTest,
+    TestParameters, AmbisonicAxesRotationTest,
     Values(TestParams({1.0f, 0.0f, 0.0f}, kXrotatedSourceAngle),
            TestParams({0.0f, 1.0f, 0.0f}, kYrotatedSourceAngle),
            TestParams({0.0f, 0.0f, 1.0f}, kZrotatedSourceAngle)));

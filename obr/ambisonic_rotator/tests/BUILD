@@ -3,7 +3,7 @@ package(default_visibility = ["//src:__subpackages__"])
 cc_test(
     name = "ambisonic_rotator_test",
     srcs = [
-        "hoa_rotator_test.cc",
+        "ambisonic_rotator_test.cc",
     ],
     deps = [
         "//obr/ambisonic_binaural_decoder:planar_interleaved_conversion",

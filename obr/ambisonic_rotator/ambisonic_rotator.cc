@@ -18,10 +18,8 @@ namespace obr {
 
 namespace {
 
-// Below are the helper methods to compute SH rotation using recursion. The code
-// is branched / modified from:
-
-// maths described in the following papers:
+// Below are the helper methods to compute SH rotation using recursion.
+// Maths described in the following papers:
 //
 // [1]  R. Green, "Spherical Harmonic Lighting: The Gritty Details", GDC 2003,
 //      http://www.research.scea.com/gdc2003/spherical-harmonic-lighting.pdf
@@ -50,7 +48,7 @@ float GetCenteredElement(const Eigen::MatrixXf& r, int i, int j) {
 
 // Helper function defined in [2] that is used by the functions U, V, W.
 // This should not be called on its own, as U, V, and W (and their coefficients)
-// select the appropriate matrix elements to access arguments |a| and |b|.
+// select the appropriate matrix elements to access arguments `a` and `b`.
 float P(int i, int a, int b, int l, const std::vector<Eigen::MatrixXf>& r) {
   if (b == l) {
     return GetCenteredElement(r[1], i, 1) *
@@ -70,7 +68,7 @@ float P(int i, int a, int b, int l, const std::vector<Eigen::MatrixXf>& r) {
 // The functions U, V, and W should only be called if the correspondingly
 // named coefficient u, v, w from the function ComputeUVWCoeff() is non-zero.
 // When the coefficient is 0, these would attempt to access matrix elements that
-// are out of bounds. The vector of rotations, |r|, must have the |l - 1|
+// are out of bounds. The vector of rotations, `r`, must have the |l - 1|
 // previously completed band rotations. These functions are valid for |l >= 2|.
 
 float U(int m, int n, int l, const std::vector<Eigen::MatrixXf>& r) {
@@ -130,7 +128,7 @@ void ComputeUVWCoeff(int m, int n, int l, float* u, float* v, float* w) {
 
 // Calculates the (2l+1)x(2l+1) rotation matrix for the band l.
 // This uses the matrices computed for band 1 and band l-1 to compute the
-// matrix for band l. |rotations| must contain the previously computed l-1
+// matrix for band l. `rotations` must contain the previously computed l-1
 // rotation matrices.
 //
 // This implementation comes from p. 5 (6346), Table 1 and 2 in [2] taking
@@ -161,7 +159,7 @@ static const float kRotationQuantizationRad = 1.0f * kRadiansFromDegrees;
 
 typedef WorldRotation AudioRotation;
 
-// Converts |world_rotation| into an equivalent audio space rotation.
+// Converts `world_rotation` into an equivalent audio space rotation.
 // The world space follows the typical CG coordinate system convention:
 // Positive x points right, positive y points up, negative z points forward.
 // The audio space follows the ambiX coordinate system convention that is
@@ -245,7 +243,7 @@ bool AmbisonicRotator::Process(const WorldRotation& target_rotation,
   }
 
   // In order to perform a smooth rotation, we divide the buffer into
-  // chunks of size |kSlerpFrameInterval|.
+  // chunks of size `kSlerpFrameInterval`.
   const size_t kSlerpFrameInterval = 32;
 
   WorldRotation slerped_rotation;
