@@ -78,6 +78,7 @@ target_link_libraries(obr PRIVATE
         pffft
         eigen
         absl::base
+        absl::check
         absl::die_if_null
         absl::flat_hash_map
         absl::log
@@ -91,3 +92,20 @@ target_link_libraries(obr PRIVATE
 # TODO(b/407470208): Define obr tests.
 
 # TODO(b/407470208): Define obr_cli executable.
+
+# --- Start Pybind11 Wrapper Logic ---
+set(CMAKE_PREFIX_PATH "/usr/local/lib/python3.11/dist-packages" ${CMAKE_PREFIX_PATH})
+find_package(pybind11 REQUIRED)
+
+pybind11_add_module(obr_wrapper python_wrapper.cc)
+target_link_libraries(obr_wrapper PRIVATE Abseil::Abseil obr_renderer)
+# --- End Pybind11 Wrapper Logic ---
+
+
+# --- Start Pybind11 Wrapper Logic ---
+set(CMAKE_PREFIX_PATH "/usr/local/lib/python3.11/dist-packages" ${CMAKE_PREFIX_PATH})
+find_package(pybind11 REQUIRED)
+
+pybind11_add_module(obr_wrapper python_wrapper.cc)
+target_link_libraries(obr_wrapper PRIVATE Abseil::Abseil obr_renderer)
+# --- End Pybind11 Wrapper Logic ---
