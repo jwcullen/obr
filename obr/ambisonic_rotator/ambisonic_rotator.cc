@@ -1,17 +1,23 @@
 /*
-* Copyright (c) 2025 Google LLC
-*
-* This source code is subject to the terms of the BSD 3-Clause Clear License,
-* which you can find in the LICENSE file, and the Open Binaural Renderer
-* Patent License 1.0, which you can find in the PATENTS file.
-*/
+ * Copyright (c) 2025 Google LLC
+ *
+ * This source code is subject to the terms of the BSD 3-Clause Clear License,
+ * which you can find in the LICENSE file, and the Open Binaural Renderer
+ * Patent License 1.0, which you can find in the PATENTS file.
+ */
 
 #include "obr/ambisonic_rotator/ambisonic_rotator.h"
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
+#include <vector>
 
+#include "Eigen/Core"
+#include "absl/log/check.h"
+#include "obr/audio_buffer/audio_buffer.h"
 #include "obr/common/ambisonic_utils.h"
+#include "obr/common/constants.h"
 #include "obr/common/misc_math.h"
 
 namespace obr {
@@ -205,7 +211,7 @@ AmbisonicRotator::AmbisonicRotator(int ambisonic_order)
 }
 
 bool AmbisonicRotator::Process(const WorldRotation& target_rotation,
-                         const AudioBuffer& input, AudioBuffer* output) {
+                               const AudioBuffer& input, AudioBuffer* output) {
   DCHECK(output);
   DCHECK_EQ(input.num_channels(), GetNumPeriphonicComponents(ambisonic_order_));
   DCHECK_EQ(input.num_channels(), output->num_channels());

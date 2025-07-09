@@ -1,10 +1,10 @@
 /*
-* Copyright (c) 2025 Google LLC
-*
-* This source code is subject to the terms of the BSD 3-Clause Clear License,
-* which you can find in the LICENSE file, and the Open Binaural Renderer
-* Patent License 1.0, which you can find in the PATENTS file.
-*/
+ * Copyright (c) 2025 Google LLC
+ *
+ * This source code is subject to the terms of the BSD 3-Clause Clear License,
+ * which you can find in the LICENSE file, and the Open Binaural Renderer
+ * Patent License 1.0, which you can find in the PATENTS file.
+ */
 
 #ifndef OBR_AMBISONIC_ROTATOR_TESTS_SPHERICAL_ANGLE_H_
 #define OBR_AMBISONIC_ROTATOR_TESTS_SPHERICAL_ANGLE_H_
@@ -26,7 +26,7 @@ class SphericalAngle {
   // Constructs a spherical angle from a given one.
   SphericalAngle(const SphericalAngle& other);
 
-  SphericalAngle& operator=(const SphericalAngle other);
+  SphericalAngle& operator=(const SphericalAngle& other);
 
   /*!\brief Returns a spherical angle representation of given `world_position`
    * (World Space).

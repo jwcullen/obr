@@ -6,10 +6,11 @@ cc_test(
         "ambisonic_rotator_test.cc",
     ],
     deps = [
+        ":spherical_angle",
         "//obr/ambisonic_binaural_decoder:planar_interleaved_conversion",
         "//obr/ambisonic_encoder",
         "//obr/ambisonic_rotator",
-        "//obr/ambisonic_rotator/tests:spherical_angle",
+        "//obr/audio_buffer",
         "//obr/common",
         "@com_google_googletest//:gtest_main",
     ],
@@ -21,9 +22,9 @@ cc_test(
         "spherical_angle_test.cc",
     ],
     deps = [
-        "//obr/ambisonic_rotator/tests:spherical_angle",
+        ":spherical_angle",
+        "//obr/common",
         "@com_google_googletest//:gtest_main",
-        "@eigen",
     ],
 )
 

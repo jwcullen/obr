@@ -49,10 +49,8 @@ add_library(pffft STATIC
 
 # Collect all source files.
 file(GLOB SourceFiles CONFIGURE_DEPENDS
-        "${CMAKE_CURRENT_SOURCE_DIR}/obr/*/*.cc"
-        "${CMAKE_CURRENT_SOURCE_DIR}/obr/*/*.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/obr/ambisonic_binaural_decoder/binaural_filters/*.cc"
-        "${CMAKE_CURRENT_SOURCE_DIR}/obr/ambisonic_binaural_decoder/binaural_filters/*.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/obr/**/*.cc"
+        "${CMAKE_CURRENT_SOURCE_DIR}/obr/**/*.h"
 )
 
 # Exclude the following files / directories.

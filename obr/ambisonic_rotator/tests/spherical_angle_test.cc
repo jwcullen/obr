@@ -1,15 +1,19 @@
 /*
-* Copyright (c) 2025 Google LLC
-*
-* This source code is subject to the terms of the BSD 3-Clause Clear License,
-* which you can find in the LICENSE file, and the Open Binaural Renderer
-* Patent License 1.0, which you can find in the PATENTS file.
-*/
+ * Copyright (c) 2025 Google LLC
+ *
+ * This source code is subject to the terms of the BSD 3-Clause Clear License,
+ * which you can find in the LICENSE file, and the Open Binaural Renderer
+ * Patent License 1.0, which you can find in the PATENTS file.
+ */
 
 #include "spherical_angle.h"
 
+#include <cstddef>
+#include <vector>
+
 #include "gtest/gtest.h"
 #include "obr/common/constants.h"
+#include "obr/common/misc_math.h"
 
 namespace obr {
 

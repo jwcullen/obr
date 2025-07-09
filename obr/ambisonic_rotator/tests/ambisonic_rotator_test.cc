@@ -1,17 +1,24 @@
 /*
-* Copyright (c) 2025 Google LLC
-*
-* This source code is subject to the terms of the BSD 3-Clause Clear License,
-* which you can find in the LICENSE file, and the Open Binaural Renderer
-* Patent License 1.0, which you can find in the PATENTS file.
-*/
+ * Copyright (c) 2025 Google LLC
+ *
+ * This source code is subject to the terms of the BSD 3-Clause Clear License,
+ * which you can find in the LICENSE file, and the Open Binaural Renderer
+ * Patent License 1.0, which you can find in the PATENTS file.
+ */
+
+#include "obr/ambisonic_rotator/ambisonic_rotator.h"
 
 #include <algorithm>
+#include <cstddef>
+#include <memory>
+#include <tuple>
+#include <vector>
 
 #include "gtest/gtest.h"
 #include "obr/ambisonic_binaural_decoder/planar_interleaved_conversion.h"
 #include "obr/ambisonic_encoder/ambisonic_encoder.h"
-#include "obr/ambisonic_rotator/ambisonic_rotator.h"
+#include "obr/audio_buffer/audio_buffer.h"
+#include "obr/common/constants.h"
 #include "obr/common/misc_math.h"
 #include "spherical_angle.h"
 
@@ -152,7 +159,7 @@ TEST_F(AmbisonicRotatorTest, RotationThresholdTest) {
 typedef tuple<WorldPosition, SphericalAngle> TestParams;
 class AmbisonicAxesRotationTest
     : public AmbisonicRotatorTest,
-                            public ::testing::WithParamInterface<TestParams> {};
+      public ::testing::WithParamInterface<TestParams> {};
 
 // Tests third order soundfield rotation against the x, y and z axis using long
 // input buffers (>> slerp interval).

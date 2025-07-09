@@ -10,6 +10,7 @@ cc_library(
     deps = [
         "//obr/audio_buffer",
         "//obr/common",
+        "@com_google_absl//absl/log:check",
         "@eigen",
     ],
 )

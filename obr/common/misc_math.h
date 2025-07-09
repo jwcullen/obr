@@ -14,7 +14,9 @@
 #include <cstdint>
 #include <limits>
 
+#include "Eigen/Core"
 #include "Eigen/Dense"
+#include "Eigen/Geometry"
 #include "absl/log/check.h"
 #include "constants.h"
 

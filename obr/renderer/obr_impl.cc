@@ -24,8 +24,10 @@
 #include "obr/ambisonic_binaural_decoder/ambisonic_binaural_decoder.h"
 #include "obr/ambisonic_binaural_decoder/sh_hrir_creator.h"
 #include "obr/ambisonic_encoder/ambisonic_encoder.h"
+#include "obr/ambisonic_rotator/ambisonic_rotator.h"
 #include "obr/audio_buffer/audio_buffer.h"
 #include "obr/common/constants.h"
+#include "obr/common/misc_math.h"
 #include "obr/peak_limiter/peak_limiter.h"
 #include "obr/renderer/audio_element_config.h"
 #include "obr/renderer/audio_element_type.h"
@@ -187,7 +189,7 @@ void ObrImpl::Process(const AudioBuffer& input_buffer,
   if (head_tracking_enabled_) {
     // Pass Ambisonic mix bed through Ambisonic Rotator.
     ambisonic_rotator_->Process(world_rotation_, ambisonic_mix_bed_,
-                          &ambisonic_mix_bed_);
+                                &ambisonic_mix_bed_);
   }
 
   // Pass Ambisonic mix bed through Ambisonic Binaural Decoder.

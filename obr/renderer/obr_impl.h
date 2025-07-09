@@ -24,6 +24,7 @@
 #include "obr/ambisonic_encoder/ambisonic_encoder.h"
 #include "obr/ambisonic_rotator/ambisonic_rotator.h"
 #include "obr/audio_buffer/audio_buffer.h"
+#include "obr/common/misc_math.h"
 #include "obr/peak_limiter/peak_limiter.h"
 #include "obr/renderer/audio_element_config.h"
 #include "obr/renderer/audio_element_type.h"

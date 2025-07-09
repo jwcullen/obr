@@ -11,23 +11,6 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
-#include <functional>
-
-#include "binaural_filters_1_oa_l.h"
-#include "binaural_filters_1_oa_r.h"
-#include "binaural_filters_2_oa_l.h"
-#include "binaural_filters_2_oa_r.h"
-#include "binaural_filters_3_oa_l.h"
-#include "binaural_filters_3_oa_r.h"
-#include "binaural_filters_4_oa_l.h"
-#include "binaural_filters_4_oa_r.h"
-#include "binaural_filters_5_oa_l.h"
-#include "binaural_filters_5_oa_r.h"
-#include "binaural_filters_6_oa_l.h"
-#include "binaural_filters_6_oa_r.h"
-#include "binaural_filters_7_oa_l.h"
-#include "binaural_filters_7_oa_r.h"
 
 namespace obr {
 
@@ -37,10 +20,6 @@ class BinauralFiltersWrapper {
   ~BinauralFiltersWrapper();
 
   std::unique_ptr<std::string> GetFile(const std::string& filename) const;
-
- private:
-  using AssetMap = std::unordered_map<std::string, std::function<std::vector<unsigned char>()>>;
-  static const AssetMap kAssetMap;
 };
 
 }  // namespace obr

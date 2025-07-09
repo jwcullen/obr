@@ -8,6 +8,8 @@
 
 #include "binaural_filters_4_oa_r.h"
 
+#include <vector>
+
 namespace obr {
 namespace filter_files {
 
