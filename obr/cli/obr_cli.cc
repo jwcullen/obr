@@ -31,7 +31,7 @@
  */
 ABSL_FLAG(obr::AudioElementType, input_type,
           obr::AudioElementType::kInvalidType,
-          "Type of input. Currently `3OA`, `7OA`, `7.1.4 `, and `OBA` are "
+          "Type of input. Currently `[1-7]OA`, `7.1.4 `, and `OBA` are "
           "supported.");
 ABSL_FLAG(
     std::string, oba_metadata_file, "",
@@ -52,8 +52,18 @@ bool AbslParseFlag(absl::string_view text, AudioElementType* input_type,
   if (text.empty()) {
     *error = "No input type specified.";
     return false;
+  } else if (text == "1OA") {
+    *input_type = AudioElementType::k1OA;
+  } else if (text == "2OA") {
+    *input_type = AudioElementType::k2OA;
   } else if (text == "3OA") {
     *input_type = AudioElementType::k3OA;
+  } else if (text == "4OA") {
+    *input_type = AudioElementType::k4OA;
+  } else if (text == "5OA") {
+    *input_type = AudioElementType::k5OA;
+  } else if (text == "6OA") {
+    *input_type = AudioElementType::k6OA;
   } else if (text == "7OA") {
     *input_type = AudioElementType::k7OA;
   } else if (text == "7.1.4") {
